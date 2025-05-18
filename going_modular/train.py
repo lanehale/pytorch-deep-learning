@@ -3,20 +3,75 @@ Trains a PyTorch image classification model using device-agnostic code.
 """
 import os
 import torch
-import data_setup, engine, model_builder, utils
+import argparse
 
+from going_modular import data_setup, engine, model_builder, utils
 from torchvision import transforms
 from pathlib import Path
 
+# Create a parser
+parser = argparse.ArgumentParser(description="Get some hyperparameters.")
+
+# Create an arg for number of epochs
+parser.add_argument("--num_epochs",
+                    default=10,
+                    type=int,
+                    help="the number of epochs to train for")
+
+# Create an arg for batch size
+parser.add_argument("--batch_size",
+                    default=32,
+                    type=int,
+                    help="number of samples per batch")
+
+# Create an arg for hidden units
+parser.add_argument("--hidden_units",
+                    default=10,
+                    type=int,
+                    help="number of hidden units in hidden layers")
+
+# Create an arg for learning rate
+parser.add_argument("--learning_rate",
+                    default=0.001,
+                    type=float,
+                    help="learning rate to use for model")
+
+# Create an arg for training directory
+parser.add_argument("--train_dir",
+                    default="data/pizza_steak_sushi/train",
+                    type=str,
+                    help="directory file path to training data in standard image classification format")
+
+# Create an arg for test directory
+parser.add_argument("--test_dir",
+                    default="data/pizza_steak_sushi/test",
+                    type=str,
+                    help="directory file path to testing data in standard image classification format")
+
+# Create an arg for model name
+parser.add_argument("--model_name",
+                    default="model_0.pth",
+                    type=str,
+                    help="model name to save")
+
+# Get our arguments from the parser
+args = parser.parse_args()
+
 # Set up hyperparameters
-NUM_EPOCHS = 5
-BATCH_SIZE = 32
-HIDDEN_UNITS = 10
-LEARNING_RATE = 0.001
+NUM_EPOCHS = args.num_epochs
+BATCH_SIZE = args.batch_size
+HIDDEN_UNITS = args.hidden_units
+LEARNING_RATE = args.learning_rate
+print(f"[INFO] Training a model for {NUM_EPOCHS} epochs with batch size {BATCH_SIZE}, hidden units {HIDDEN_UNITS} and learning rate {LEARNING_RATE}...")
 
 # Set up directories
-train_dir = "data/pizza_steak_sushi/train"
-test_dir = "data/pizza_steak_sushi/test"
+train_dir = args.train_dir
+test_dir = args.test_dir
+print(f"[INFO] Training data file: {train_dir}")
+print(f"[INFO] Testing data file: {test_dir}")
+
+model_name = args.model_name
+print(f"[INFO] Model will be saved as: {model_name}")
 
 # Set up target device
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -24,6 +79,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 # Create transforms
 data_transform = transforms.Compose([
     transforms.Resize((224, 224)),
+    transforms.RandomHorizontalFlip(p=0.5),
     transforms.ToTensor()
 ])
 
@@ -59,8 +115,10 @@ engine.train(model=model,
              device=device)
 
 # Save the model with help from utils.py
+target_dir = Path("saved_models")
+
 utils.save_model(
     model=model,
-    target_dir=Path("models"),
-    model_name="05_going_modular_script_mode_tinyvgg_model.pth"
+    target_dir=target_dir,
+    model_name=model_name
 )
