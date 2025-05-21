@@ -1,5 +1,5 @@
 """
-Contains functionality for downloading custom images from GitHub
+Contains functionality for downloading custom images from GitHub.
 """
 import requests
 from pathlib import Path
