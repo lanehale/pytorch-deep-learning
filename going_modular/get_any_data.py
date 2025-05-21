@@ -1,5 +1,5 @@
 """
-Contains functionality for creating data folders and downloading requested data.
+Contains functionality for creating data folders and downloading from any specified data path.
 """
 import os
 import requests
