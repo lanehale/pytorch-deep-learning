@@ -1,6 +1,5 @@
 """
-Contains functionality for creating data folders and
-downloading data.
+Contains functionality for creating data folders and downloading pizza_steak_sushi data.
 """
 import os
 import requests
