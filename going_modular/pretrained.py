@@ -15,10 +15,12 @@ from tqdm.auto import tqdm
 # See if torchmetrics exists, if not, install it
 try:
   import torchmetrics, mlxtend
+  print("torchmetrics already installed.")
 except:
   print("Installing torchmetrics...")
   os.system('pip install -q torchmetrics -U mlxtend')
   import torchmetrics, mlxtend
+  print("Done installing torchmetrics.")
 
 # Import specific functionalities from torchmetrics and mlxtend
 from torchmetrics.classification import ConfusionMatrix
@@ -32,7 +34,7 @@ except:
   print("Installing SummaryWriter...")
   !pip install -q tensorboard
   from torch.utils.tensorboard import SummaryWriter
-  print("SummaryWriter installed.")
+  print("Done installing SummaryWriter.")
 
 
 """
