@@ -24,6 +24,16 @@ except:
 from torchmetrics.classification import ConfusionMatrix
 from mlxtend.plotting import plot_confusion_matrix
 
+# See if tensorboard exists, if not, install it
+try:
+  from torch.utils.tensorboard import SummaryWriter
+  print("SummaryWriter already installed.")
+except:
+  print("Installing SummaryWriter...")
+  !pip install -q tensorboard
+  from torch.utils.tensorboard import SummaryWriter
+  print("SummaryWriter installed.")
+
 
 """
 Contains a function to make predictions on test data.
@@ -172,6 +182,84 @@ def run_model(model,
   print(f"Max test acc: {max(results['test_acc']):.3f} | Min test loss: {min(results['test_loss']):.3f}")
 
   return results, pred_list
+
+
+"""
+Contains a function to run data through torchvision models
+and track data with SummaryWriter.
+"""
+def run_model_writer(model,
+                     weights,
+                     train_dir,
+                     test_dir,
+                     batch_size,
+                     dropout,
+                     in_features,
+                     optimizer_type,
+                     optimizer_lr,
+                     num_epochs,
+                     image_data,
+                     device,
+                     writer):
+
+  auto_transforms = weights.transforms()
+
+  # Create training and testing DataLoaders and get a list of class names
+  train_dataloader, test_dataloader, class_names = data_setup.create_dataloaders(
+      train_dir=train_dir,
+      test_dir=test_dir,
+      transform=auto_transforms,  # perform the same data transforms on our training data as the pretrained model
+      batch_size=batch_size
+  )
+
+  # Freeze all base layers in the "features" section of the model
+  for parm in model.features.parameters():
+    parm.requires_grad = False
+
+  """ Adjust the output layer or the classifier portion of our pretrained model to our needs (out_features=3). """
+  # Set manual seeds
+  torch.manual_seed(42)
+  torch.cuda.manual_seed(42)
+
+  # Get the length of class_names (one output unit for each class)
+  output_shape = len(class_names)
+
+  # Recreate the classifier layer and seed it to the target device
+  model.classifier = torch.nn.Sequential(
+      torch.nn.Dropout(p=dropout, inplace=True),
+      torch.nn.Linear(in_features=in_features,
+                      out_features=output_shape,  # same number of output units as number of classes
+                      bias=True)).to(device)
+
+  # Define loss and optimizer
+  loss_fn = nn.CrossEntropyLoss()
+  if optimizer_type == "Adam":
+    optimizer = torch.optim.Adam(model.parameters(), lr=optimizer_lr)
+  else:
+    optimizer = torch.optim.SGD(model.parameters(), lr=optimizer_lr)
+
+  """ Train the model """
+  # Start the timer
+  from timeit import default_timer as timer
+  start_time = timer()
+
+  """ Note: We're only going to be training the parameters classifier here as all of the other parameters in our model have been frozen. """
+  # Set up training and save the results
+  print(f"Training the model...")
+  results = engine.train_writer(model=model,
+                                train_dataloader=train_dataloader,
+                                test_dataloader=test_dataloader,
+                                optimizer=optimizer,
+                                loss_fn=loss_fn,
+                                epochs=num_epochs,
+                                device=device,
+                                writer=writer)
+
+  # End the timer and print out how long it took
+  end_time = timer()
+  print(f"[INFO] Total running time: {end_time - start_time:.3f} seconds")
+
+  return results
 
 
 """
