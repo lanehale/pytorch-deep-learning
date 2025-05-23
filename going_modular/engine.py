@@ -194,6 +194,9 @@ def train(model: torch.nn.Module,
   return results
 
 
+"""
+A copy of the train function with SummaryWriter added to track data.
+"""
 def train_writer(model: torch.nn.Module,
                  train_dataloader: torch.utils.data.DataLoader,
                  test_dataloader: torch.utils.data.DataLoader,
@@ -233,7 +236,8 @@ def train_writer(model: torch.nn.Module,
                   test_acc: [0.3400, 0.2973]} 
   """
   # Create empty results dictionary
-  results = {"train_loss": [],
+  results = {
+      "train_loss": [],
       "train_acc": [],
       "test_loss": [],
       "test_acc": []
