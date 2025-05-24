@@ -26,7 +26,8 @@ def save_model(model: torch.nn.Module,
   
   # Create model save path
   assert model_name.endswith(".pth") or model_name.endswith(".pt"), "model_name should end with '.pt' or '.pth'"  # text to display if assert check fails
-  model_save_path = target_dir / model_name
+  """model_save_path = target_dir / model_name  # str / str unsupported syntax - can't combine strings with a slash this way """
+  model_save_path = os.path.join(target_dir, model_name)
 
   # Save the model state_dict()
   print(f"[INFO] Saving model to: {model_save_path}")
