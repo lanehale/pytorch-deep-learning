@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from torch import nn
 from torchvision import transforms
-
+from torch.utils.tensorboard import SummaryWriter
 from typing import List, Tuple
 from pathlib import Path
 from PIL import Image
