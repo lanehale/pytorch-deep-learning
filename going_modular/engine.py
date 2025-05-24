@@ -205,7 +205,8 @@ def train_writer(model: torch.nn.Module,
                  loss_fn: torch.nn.Module,
                  epochs: int,
                  device: torch.device,
-                 writer: torch.utils.tensorboard.writer.SummaryWriter) -> Dict[str, List]:
+                 writer: torch.utils.tensorboard.writer.SummaryWriter
+                 ) -> Dict[str, List]:
   """Trains and tests a PyTorch model.
 
   Sends a target PyTorch model through train_step() and test_step()
@@ -222,6 +223,7 @@ def train_writer(model: torch.nn.Module,
     loss_fn: A PyTorch loss function to calculate loss on both datasets.
     epochs: An integer indicating how many epochs to train for.
     device: A target device to compute on (e.g. "cuda" or "cpu").
+    writer: A SummaryWriter() instance to log model results to.
 
   Returns:
     A dictionary of training and testing loss as well as training and
@@ -238,11 +240,10 @@ def train_writer(model: torch.nn.Module,
                   test_acc: [0.3400, 0.2973]} 
   """
   # Create empty results dictionary
-  results = {
-      "train_loss": [],
-      "train_acc": [],
-      "test_loss": [],
-      "test_acc": []
+  results = {"train_loss": [],
+             "train_acc": [],
+             "test_loss": [],
+             "test_acc": []
   }
 
   # Loop through training and testing steps for a number of epochs
