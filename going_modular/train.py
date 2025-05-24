@@ -120,5 +120,6 @@ target_dir = Path("saved_models")
 utils.save_model(
     model=model,
     target_dir=target_dir,
-    model_name=model_name
+    model_name=model_name,
+    device=device
 )
