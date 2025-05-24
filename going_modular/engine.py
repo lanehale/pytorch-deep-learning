@@ -7,16 +7,7 @@ import os
 from tqdm.auto import tqdm
 from datetime import datetime
 from typing import Dict, List, Tuple
-
-# See if tensorboard exists, if not, install it
-try:
-  from torch.utils.tensorboard import SummaryWriter
-  print("SummaryWriter already installed.")
-except:
-  print("Installing SummaryWriter...")
-  !pip install -q tensorboard
-  from torch.utils.tensorboard import SummaryWriter
-  print("Done installing SummaryWriter.")
+from torch.utils.tensorboard import SummaryWriter
 
 
 def train_step(model: torch.nn.Module,
