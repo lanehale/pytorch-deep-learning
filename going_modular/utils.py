@@ -1,17 +1,24 @@
 """
-Contains various utility functions for PyTorch model training and saving.
+Contains various utility functions for PyTorch model training.
 """
 import torch
 import torchvision
 import matplotlib.pyplot as plt
 
 from torch import nn
-from PIL import Image
-from pathlib import Path
-from typing import List, Tuple
 from torchvision import transforms
 
+from typing import List, Tuple
+from pathlib import Path
+from PIL import Image
 
+# Add import for os and datetime to fix potential NameErrors later
+import os
+from datetime import datetime
+
+"""
+Save a PyTorch model to a target directory.
+"""
 def save_model(model: torch.nn.Module,
                target_dir: str,
                model_name: str):
@@ -43,7 +50,7 @@ def save_model(model: torch.nn.Module,
 
 
 """
-Makes predictions with a trained PyTorch model and plots the results above the image.
+Make predictions on images and plot them.
 """
 # 1. Take in a trained model, class names, image path, image size, a transform and target device
 def pred_and_plot_image(model: torch.nn.Module,
@@ -51,19 +58,32 @@ def pred_and_plot_image(model: torch.nn.Module,
                         class_names: List[str],
                         image_size: Tuple[int, int] = (224, 224),
                         transform: torchvision.transforms = None,
-                        device: torch.device=device):
+                        device: torch.device='cpu'):               # Removed the default device=device here
+  """Makes a prediction on a target image and plots the image and prediction.
+
+  Args:
+      model: A PyTorch model to make a prediction on.
+      image_path: The path to the target image to make a prediction on.
+      class_names: A list of the class names for the model.
+      image_size: The size the image should be resized to before being passed to
+          the model.
+      transform: A torchvision transforms object to transform the target image
+          before being passed to the model. If None, a transforms.Resize +
+          transforms.ToTensor() will be created.
+      device: The device the model is on (e.g. "cuda" or "cpu").
+  """
   # 2. Open image
   img = Image.open(image_path)
 
-  # 3. Create transformation for image (if one doesn't exist)
+  # 3. Transform the image
   if transform is not None:
+    # Use the provided transform
     image_transform = transform
   else:
+    # Otherwise use a standard transform
     image_transform = transforms.Compose([
         transforms.Resize(image_size),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                             std=[0.229, 0.224, 0.225]),
     ])
 
   ### Predict on image ###
@@ -89,5 +109,75 @@ def pred_and_plot_image(model: torch.nn.Module,
   # 10. Plot image with predicted label and probability
   plt.figure()
   plt.imshow(img)
-  plt.title(f"Pred: {class_names[target_image_pred_label]} | Prob: {target_image_pred_probs.max():.3f}")
+  plt.title(f"Pred: {class_names[target_image_pred_label.cpu()]} | Prob: {target_image_pred_probs.max():.3f}")
   plt.axis(False);
+
+
+"""
+Plot loss and accuracy curves of a model.
+"""
+def plot_loss_curves(results):
+    """Plots training curves of a results dictionary.
+
+    Args:
+        results (dict): dictionary containing list of results, e.g.
+            {'train_loss': [...],
+             'train_acc': [...],
+             'test_loss': [...],
+             'test_acc': [...]}
+    """
+    loss = results['train_loss']
+    test_loss = results['test_loss']
+
+    accuracy = results['train_acc']
+    test_accuracy = results['test_acc']
+
+    epochs = range(len(results['train_loss']))
+
+    plt.figure(figsize=(15, 7))
+
+    # Plot loss
+    plt.subplot(1, 2, 1)
+    plt.plot(epochs, loss, label='train_loss')
+    plt.plot(epochs, test_loss, label='test_loss')
+    plt.title('Loss')
+    plt.xlabel('Epochs')
+    plt.legend()
+
+    # Plot accuracy
+    plt.subplot(1, 2, 2)
+    plt.plot(epochs, accuracy, label='train_accuracy')
+    plt.plot(epochs, test_accuracy, label='test_accuracy')
+    plt.title('Accuracy')
+    plt.xlabel('Epochs')
+    plt.legend()
+
+
+"""
+Add a helper function to create a SummaryWriter
+"""
+def create_writer(experiment_name: str,
+                  model_name: str,
+                  extra: str=None) -> torch.utils.tensorboard.SummaryWriter():
+  """Creates a torch.utils.tensorboard.SummaryWriter() instance saving to a specific log_dir.
+
+  Args:
+      experiment_name (str): Name of experiment.
+      model_name (str): Name of model.
+      extra (str, optional): Anything extra to add to the log directory. Defaults to None.
+
+  Returns:
+      torch.utils.tensorboard.SummaryWriter(): Instance of a SummaryWriter saving to log_dir.
+  """
+  timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") # returns current time in HH:MM:SS format
+  
+  if extra:
+    # Create log directory path
+    log_dir = os.path.join("runs", experiment_name, model_name, extra, timestamp)
+  else:
+    # Create log directory path
+    log_dir = os.path.join("runs", experiment_name, model_name, timestamp)
+    
+  print(f"[INFO] Created SummaryWriter, saving to: {log_dir}")
+  
+  return SummaryWriter(log_dir=log_dir)
