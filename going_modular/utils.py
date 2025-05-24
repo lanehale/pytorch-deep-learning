@@ -109,7 +109,7 @@ def pred_and_plot_image(model: torch.nn.Module,
   # 10. Plot image with predicted label and probability
   plt.figure()
   plt.imshow(img)
-  plt.title(f"Pred: {class_names[target_image_pred_label.cpu()]} | Prob: {target_image_pred_probs.max():.3f}")
+  plt.title(f"Pred: {class_names[target_image_pred_label]} | Prob: {target_image_pred_probs.max():.3f}")
   plt.axis(False);
 
 
