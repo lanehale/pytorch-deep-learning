@@ -7,9 +7,10 @@ from pathlib import Path
 data_path = Path("data")
 
 # Get multiple custom images
-""" to get raw address:  right click jpeg file name in main repository view, select copy link address, paste into browser and enter
-    then right click on image, select copy link address = https://github.com/lanehale/pytorch-deep-learning/blob/main/cheese-pizza.jpeg?raw=true
-    paste into browser and enter to get url format below
+"""
+To get raw address:  right click jpeg file name in main repository view, select copy link address, paste into browser and enter. Then
+right click on image, select copy link address = https://github.com/lanehale/pytorch-deep-learning/blob/main/cheese-pizza.jpeg?raw=true
+paste into browser and enter to get url format below
 """
 urls = [
     "https://raw.githubusercontent.com/lanehale/pytorch-deep-learning/refs/heads/main/custom_images/cheese-pizza.jpeg",
