@@ -244,7 +244,7 @@ def train_writer(model: torch.nn.Module,
              "train_acc": [],
              "test_loss": [],
              "test_acc": []
-  }
+             }
 
   # Loop through training and testing steps for a number of epochs
   for epoch in tqdm(range(epochs)):
