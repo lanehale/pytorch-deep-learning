@@ -168,16 +168,26 @@ def create_writer(experiment_name: str,
 
   Returns:
       torch.utils.tensorboard.SummaryWriter(): Instance of a SummaryWriter saving to log_dir.
+
+  Example usage:
+    # Create a writer saving to "runs/2025-05-24/data_10_percent/effnetb2/5_epochs/"
+    writer = create_writer(experiment_name="data_10_percent",
+                           model_name="effnetb2",
+                           extra="5_epochs")
+
+    # The above is the same as:
+    writer = SummaryWriter(log_dir="runs/2025-05-24/data_10_percent/effnetb2/5_epochs/")
+
   """
-  timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") # returns current time in HH:MM:SS format
-  
+  # Get timestamp of current date (all experiments on certain day live in same folder)
+  timestamp = datetime.now().strftime("%Y-%m-%d")  # returns current date in YYYY-MM-DD format
+
   if extra:
     # Create log directory path
-    log_dir = os.path.join("runs", experiment_name, model_name, extra, timestamp)
+    log_dir = os.path.join("runs", timestamp, experiment_name, model_name, extra)
   else:
-    # Create log directory path
-    log_dir = os.path.join("runs", experiment_name, model_name, timestamp)
-    
-  print(f"[INFO] Created SummaryWriter, saving to: {log_dir}")
-  
+    log_dir = os.path.join("runs", timestamp, experiment_name, model_name)
+
+  print(f"[INFO] Created SummaryWriter, saving to: {log_dir}...")
+
   return SummaryWriter(log_dir=log_dir)
