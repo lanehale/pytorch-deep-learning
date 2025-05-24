@@ -6,35 +6,18 @@ import torch
 import torchvision
 import pandas as pd
 import matplotlib.pyplot as plt
+import torchmetrics, mlxtend
 
 from torch import nn
 from torchvision import transforms
 from going_modular import data_setup, engine
 from tqdm.auto import tqdm
 
-# See if torchmetrics exists, if not, install it
-try:
-  import torchmetrics, mlxtend
-  print("torchmetrics already installed.")
-except:
-  print("Installing torchmetrics...")
-  os.system('pip install -q torchmetrics -U mlxtend')
-  import torchmetrics, mlxtend
-  print("Done installing torchmetrics.")
-
 # Import specific functionalities from torchmetrics and mlxtend
 from torchmetrics.classification import ConfusionMatrix
 from mlxtend.plotting import plot_confusion_matrix
 
-# See if tensorboard exists, if not, install it
-try:
-  from torch.utils.tensorboard import SummaryWriter
-  print("SummaryWriter already installed.")
-except:
-  print("Installing SummaryWriter...")
-  !pip install -q tensorboard
-  from torch.utils.tensorboard import SummaryWriter
-  print("Done installing SummaryWriter.")
+from torch.utils.tensorboard import SummaryWriter
 
 
 """
