@@ -25,12 +25,12 @@ def from_path(from_path: str,         # e.g. "pizza_steak_sushi_20_percent.zip"
       #url = Path("https://github.com/mrdbourke/pytorch-deep-learning/raw/main/data/") / from_path  # Path removes extra slash
       url = "https://github.com/mrdbourke/pytorch-deep-learning/raw/main/data/" + from_path
       request = requests.get(url)
-      print("Downloading {image_dir} data...")    # pizza, steak, sushi
+      print(f"Downloading {image_dir} data...")    # pizza, steak, sushi
       f.write(request.content)
 
     # Unzip image data
     with zipfile.ZipFile(data_path / from_path, "r") as zip_ref:  # "pizza_steak_sushi_20_percent.zip"
-      print("Unzipping {image_dir} data...")      # pizza, steak, sushi
+      print(f"Unzipping {image_dir} data...")      # pizza, steak, sushi
       zip_ref.extractall(image_path)
 
     # Remove zip file
