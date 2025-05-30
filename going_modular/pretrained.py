@@ -231,7 +231,7 @@ def run_model_writer(model,
 
   """ Note: We're only going to be training the parameters classifier here as all of the other parameters in our model have been frozen. """
   # Set up training and save the results
-  print(f"Training the {model_name} model...")
+  print(f"Training with model {model_name}...")
   results = engine.train_writer(model=model,
                                 train_dataloader=train_dataloader,
                                 test_dataloader=test_dataloader,
