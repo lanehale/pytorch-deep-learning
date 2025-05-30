@@ -185,7 +185,8 @@ def run_model_writer(model,
                      num_epochs,
                      image_data,
                      device,
-                     writer):
+                     writer,
+                     model_name):
 
   auto_transforms = weights.transforms()
 
@@ -230,7 +231,7 @@ def run_model_writer(model,
 
   """ Note: We're only going to be training the parameters classifier here as all of the other parameters in our model have been frozen. """
   # Set up training and save the results
-  print(f"Training the model...")
+  print(f"Training the {model_name} model...")
   results = engine.train_writer(model=model,
                                 train_dataloader=train_dataloader,
                                 test_dataloader=test_dataloader,
@@ -244,7 +245,19 @@ def run_model_writer(model,
   end_time = timer()
   print(f"[INFO] Total running time: {end_time - start_time:.3f} seconds")
 
-  return results
+  # Make predictions and store in a list of dictionaries
+  print(f"Predicting with {test_dir} image_data...")
+  pred_list, test_preds_tensor = predict_and_store(
+      model=model,
+      test_paths=image_data,
+      tranform=auto_transforms,
+      class_names=class_names,
+      device=device
+  )
+
+  print(f"Max test acc: {max(results['test_acc']):.3f} | Min test loss: {min(results['test_loss']):.3f}")
+
+  return results, pred_list
 
 
 """
