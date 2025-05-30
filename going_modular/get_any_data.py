@@ -38,7 +38,7 @@ def from_path(from_path: str,         # e.g. "pizza_steak_sushi_20_percent.zip"
 
   # For some reason os.system('any linux cmd') commands aren't working in this function, have to use popen or subprocess instead
   print(f">!ls {image_path}")
-  cmd = f"ls {image_path}"  # "ls data/pizza_steak_sushi"
+  cmd = f"ls {image_path}"            # "ls data/pizza_steak_sushi"
   output = os.popen(cmd).read()
   print(output)
 
