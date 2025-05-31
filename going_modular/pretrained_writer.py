@@ -75,6 +75,7 @@ def run_model_writer(model,
                      image_data,
                      device,
                      writer,
+                     model_name,
                      transform=None):
 
   if transform == None:
