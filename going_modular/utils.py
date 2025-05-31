@@ -203,7 +203,7 @@ def compare_results(pred_list, name):
       false_count += 1
   false_percent = 100 * false_count / len(pred_list)
   print(
-      f"{name :<46} | False predictions: {false_count :<2} out of {len(pred_list) :<3}, "
+      f"{name :<37} | False predictions: {false_count :<2} out of {len(pred_list) :<3}, "
       f"or {false_percent:5.2f}% wrong, "
       f"{(100.0 - false_percent):.2f}% right"
   )
