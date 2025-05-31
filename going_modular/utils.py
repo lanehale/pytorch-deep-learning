@@ -196,14 +196,15 @@ def create_writer(experiment_name: str,
 """
 Create a function to display results
 """
-def compare_results(pred_list, name):
+def compare_results(pred_list, name, col1_width):
   false_count = 0
   for pred in pred_list:
     if pred['correct'] == False:
       false_count += 1
   false_percent = 100 * false_count / len(pred_list)
+  formatted_string = ("%-"+str(col1_width)+"s") % name   # e.g. formatted_string = "%-45s" % name
   print(
-      f"{name :<37} | False predictions: {false_count :<2} out of {len(pred_list) :<3}, "
+      f"{formatted_string} | False predictions: {false_count :<2} out of {len(pred_list) :<3}, "
       f"or {false_percent:5.2f}% wrong, "
       f"{(100.0 - false_percent):.2f}% right"
   )
