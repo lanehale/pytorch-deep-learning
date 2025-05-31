@@ -75,15 +75,16 @@ def run_model_writer(model,
                      image_data,
                      device,
                      writer,
-                     model_name):
+                     transform=None):
 
-  auto_transforms = weights.transforms()
+  if transform == None:
+    transform = weights.transforms()  # default to auto transforms
 
   # Create training and testing DataLoaders and get a list of class names
   train_dataloader, test_dataloader, class_names = data_setup.create_dataloaders(
       train_dir=train_dir,
       test_dir=test_dir,
-      transform=auto_transforms,  # perform the same data transforms on our training data as the pretrained model
+      transform=transform,   # perform the same data transforms on our training data as the pretrained model
       batch_size=batch_size
   )
 
@@ -133,6 +134,8 @@ def run_model_writer(model,
   # End the timer and print out how long it took
   end_time = timer()
   print(f"[INFO] Total running time: {end_time - start_time:.3f} seconds")
+
+  auto_transforms = weights.transforms()  # transform the image to predict but don't augment it
 
   # Make predictions and store in a list of dictionaries
   print(f"Predicting with {test_dir} image_data...")
