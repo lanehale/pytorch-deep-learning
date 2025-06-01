@@ -33,7 +33,7 @@ def predict_and_store(model, test_paths, tranform, class_names, device):
 
     # Save prediction and pred prob
     from PIL import Image
-    img = Image.open(path)
+    img = Image.open(path).convert("RGB")  # ensure images are converted to RGB format before applying the default transformations
     transformed_image = tranform(img).unsqueeze(dim=0).to(device)  # transform image and add batch dimension
     model.eval()
     with torch.inference_mode():
