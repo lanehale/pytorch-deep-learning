@@ -9,7 +9,7 @@ from torch import nn
 from torchvision import transforms
 from going_modular import data_setup, engine
 from tqdm.auto import tqdm
-
+from PIL import Image
 from torch.utils.tensorboard import SummaryWriter
 
 
@@ -32,7 +32,6 @@ def predict_and_store(model, test_paths, tranform, class_names, device):
     pred_dict["class_name"] = class_name
 
     # Save prediction and pred prob
-    from PIL import Image
     img = Image.open(path).convert("RGB")  # ensure images are converted to RGB format before applying the default transformations
     transformed_image = tranform(img).unsqueeze(dim=0).to(device)  # transform image and add batch dimension
     model.eval()
