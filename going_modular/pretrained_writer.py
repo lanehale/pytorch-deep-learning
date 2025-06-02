@@ -17,7 +17,7 @@ from torch.utils.tensorboard import SummaryWriter
 Contains a function to make predictions on test data.
 """
 # Create a function to return a list of dictionaries with sample, label, prediction, pred prob
-def predict_and_store(model, test_paths, tranform, class_names, device):
+def predict_and_store(model, test_paths, transform, class_names, device):
   pred_list = []
   test_preds = []
   for path in test_paths:
@@ -33,7 +33,7 @@ def predict_and_store(model, test_paths, tranform, class_names, device):
 
     # Save prediction and pred prob
     img = Image.open(path).convert("RGB")  # ensure images are converted to RGB format before applying the default transformations
-    transformed_image = tranform(img).unsqueeze(dim=0).to(device)  # transform image and add batch dimension
+    transformed_image = transform(img).unsqueeze(dim=0).to(device)  # transform image and add batch dimension
     model.eval()
     with torch.inference_mode():
       pred_logit = model(transformed_image.to(device))
@@ -142,7 +142,7 @@ def run_model_writer(model,
   pred_list, test_preds_tensor = predict_and_store(
       model=model,
       test_paths=image_data,
-      tranform=auto_transforms,
+      transform=auto_transforms,
       class_names=class_names,
       device=device
   )
