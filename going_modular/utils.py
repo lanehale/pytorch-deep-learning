@@ -58,6 +58,7 @@ def pred_and_plot_image(model: torch.nn.Module,
                         class_names: List[str],
                         image_size: Tuple[int, int] = (224, 224),
                         transform: torchvision.transforms = None,
+                        extra_title: bool = False,
                         device: torch.device='cpu'):               # Removed the default device=device here
   """Makes a prediction on a target image and plots the image and prediction.
 
@@ -109,7 +110,10 @@ def pred_and_plot_image(model: torch.nn.Module,
   # 10. Plot image with predicted label and probability
   plt.figure()
   plt.imshow(img)
-  plt.title(f"Pred: {class_names[target_image_pred_label]} | Prob: {target_image_pred_probs.max():.3f}")
+  if extra_title == True:
+    plt.title(f"{image_path}\nPred: {class_names[target_image_pred_label]} | Prob: {target_image_pred_probs.max():.3f}")
+  else:
+    plt.title(f"Pred: {class_names[target_image_pred_label]} | Prob: {target_image_pred_probs.max():.3f}")
   plt.axis(False);
 
 
