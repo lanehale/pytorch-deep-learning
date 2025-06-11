@@ -104,8 +104,8 @@ def run_model_writer(model,
   # Recreate the classifier layer and seed it to the target device
   if dropout == 99.9:
     model.heads = nn.Sequential(
-      nn.Linear(in_features=in_features,   # keep this the same as original model
-                out_features=num_classes)  # update to reflect target number of classes
+      nn.Linear(in_features=in_features,    # keep this the same as original model
+                out_features=output_shape)  # update to reflect target number of classes
     )
   else:
     model.classifier = torch.nn.Sequential(
