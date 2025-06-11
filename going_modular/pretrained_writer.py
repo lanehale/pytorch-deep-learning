@@ -89,7 +89,8 @@ def run_model_writer(model,
   )
 
   # Freeze all base layers in the "features" section of the model
-  for parm in model.features.parameters():
+  #for parm in model.features.parameters():
+  for parm in model.parameters():
     parm.requires_grad = False
 
   """ Adjust the output layer or the classifier portion of our pretrained model to our needs (out_features=3). """
