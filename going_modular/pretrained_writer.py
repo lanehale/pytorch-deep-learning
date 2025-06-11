@@ -106,7 +106,7 @@ def run_model_writer(model,
     model.heads = nn.Sequential(
       nn.Linear(in_features=in_features,    # keep this the same as original model
                 out_features=output_shape)  # update to reflect target number of classes
-    ).to(device)                            # remember this?
+    ).to(device)                            # remember this
   else:
     model.classifier = torch.nn.Sequential(
         torch.nn.Dropout(p=dropout, inplace=True),
