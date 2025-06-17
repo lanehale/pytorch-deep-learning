@@ -37,12 +37,12 @@ something is one thing or another)
 ****************************************************************
 *	03_computer_vision.ipynb
 
-Applying the PyTorch Workflow from the past couple of sections 
-to computer vision (the art of teaching a computer to see)
+Applying the PyTorch Workflow from previous sections to 
+computer vision (the art of teaching a computer to see)
 ****************************************************************
 *	04_custom_datasets.ipynb
 
-Applying the PyTorch Workflow we covered in notebooks 01 and 02 
+Applying the PyTorch Workflow covered in notebooks 01 and 02 
 to a computer vision problem with our own dataset of pizza, 
 steak and sushi images
 ****************************************************************
