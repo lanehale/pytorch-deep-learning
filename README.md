@@ -1,6 +1,6 @@
 # pytorch-deep-learning
 learnpytorch.io hands-on Python coding exercises for AI Convolutional Neural Networks
-
+****************************************************************
 This repository contains Colab notebooks of my Python code using PyTorch to build
 image classification models.
 
@@ -20,7 +20,6 @@ https://huggingface.co/spaces/lanehale1/foodvision_mini
 https://huggingface.co/spaces/lanehale1/foodvision_big
 
 Notebooks Overview:
-****************************************************************
 *	00_pytorch_fundamentals.ipynb
 
 Dealing with the basic building block of machine learning and 
