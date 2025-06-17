@@ -20,6 +20,7 @@ https://huggingface.co/spaces/lanehale1/foodvision_mini
 https://huggingface.co/spaces/lanehale1/foodvision_big
 
 Notebooks Overview:
+```
 *****************************************************************
 *	00_pytorch_fundamentals.ipynb				*
 *****************************************************************
@@ -106,4 +107,4 @@ as a usable app
 *	09_model_deployment_part_2.ipynb			*
 *****************************************************************
 Bringing FoodVision Mini to life by creating a Gradio demo
-
+```
