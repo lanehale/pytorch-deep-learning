@@ -19,7 +19,7 @@ https://huggingface.co/spaces/lanehale1/foodvision_mini
 
 https://huggingface.co/spaces/lanehale1/foodvision_big
 
-**Notebooks Overview:**
+##Notebooks Overview:
 *	00_pytorch_fundamentals.ipynb
 
 Dealing with the basic building block of machine learning and 
