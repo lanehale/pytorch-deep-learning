@@ -24,12 +24,12 @@ https://huggingface.co/spaces/lanehale1/foodvision_big
 
 Dealing with the basic building block of machine learning and 
 deep learning--the tensor
-________________________________________________________________
+****************************************************************
 *	01_workflow_fundamentals.ipynb
 
 Learning a standard PyTorch workflow (it can be chopped and 
 changed as necessary but it covers the main outline of steps)
-----------------------------------------------------------------
+****************************************************************
 *	02_neural_network_classification.ipynb
 
 Working on a classification problem (predicting whether 
