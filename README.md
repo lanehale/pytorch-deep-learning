@@ -29,7 +29,7 @@ ________________________________________________________________
 
 Learning a standard PyTorch workflow (it can be chopped and 
 changed as necessary but it covers the main outline of steps)
-****************************************************************
+----------------------------------------------------------------
 *	02_neural_network_classification.ipynb
 
 Working on a classification problem (predicting whether 
