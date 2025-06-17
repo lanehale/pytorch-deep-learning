@@ -42,9 +42,8 @@ computer vision (the art of teaching a computer to see)
 ****************************************************************
 *	04_custom_datasets.ipynb
 
-Applying the PyTorch Workflow covered in notebooks 01 and 02 
-to a computer vision problem with our own dataset of pizza, 
-steak and sushi images
+Applying the PyTorch Workflow to a computer vision problem 
+with our own dataset of pizza, steak and sushi images
 ****************************************************************
 *	05_modular_python_scripts.ipynb
 
