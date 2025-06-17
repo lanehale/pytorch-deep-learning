@@ -58,7 +58,7 @@ Using pretrained models with our pizza, steak, sushi data
 *	06_transfer_learning_scripts.ipynb
 
 Creating scripts to help run several transfer learning model 
-experiments with different hyperparameters
+experiments with less code
 ****************************************************************
 *	06_transfer_learning_experiments.ipynb
 
