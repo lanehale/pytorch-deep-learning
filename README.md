@@ -80,8 +80,8 @@ Trying larger models and larger datasets
 ****************************************************************
 *	08_replicating_transformer_encoders.ipynb
 
-Replicating a machine learning research paper and creating 
-a Vision Transformer (ViT) from scratch using PyTorch
+Replicating a machine learning research paper to create a 
+Vision Transformer (ViT) from scratch using PyTorch
 ****************************************************************
 *	09_model_deployment_part_1.ipynb
 
