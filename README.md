@@ -19,6 +19,10 @@ https://huggingface.co/spaces/lanehale1/foodvision_mini
 
 https://huggingface.co/spaces/lanehale1/foodvision_big
 
+### See the best models loss curves and predictions in Loss_Curves_and_Predictions.md
+
+https://github.com/lanehale/pytorch-deep-learning/blob/main/Loss_Curves_and_Predictions.md
+
 ## Notebooks Overview:
 *	00_pytorch_fundamentals.ipynb
 
