@@ -13,7 +13,7 @@ for Deep Learning.
 
 The hands-on learning culminates in three milestone projects in notebooks 7 through 9.
 
-The final two apps built in notebook 9 can be accessed at:
+### The final two apps built in notebook 9 can be accessed at:
 
 https://huggingface.co/spaces/lanehale1/foodvision_mini
 
