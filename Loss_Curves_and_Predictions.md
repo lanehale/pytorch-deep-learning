@@ -17,3 +17,7 @@
 ### Predictions using ViTB16 model trained for 10 epochs with 20% dataset
 
 ![Predictions using ViTB16 model trained for 10 epochs with 20% dataset](https://github.com/lanehale/pytorch-deep-learning/blob/main/loss-curves-images/ViTB16_model_predictions.png)
+
+### Statistics for both models
+
+![Statistics for both models](https://github.com/lanehale/pytorch-deep-learning/blob/main/loss-curves-images/Statistics%20for%20both%20models.png)
