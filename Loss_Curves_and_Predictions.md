@@ -1,6 +1,6 @@
 ### Confusion Matrix for EffNetB2 model trained for 10 epochs with 20% dataset
 
-**False predictions: 4 out of 150, or 2.67% wrong, 97.33% right**
+False predictions: 4 out of 150, or 2.67% wrong, 97.33% right
 ![Confusion Matrix for EffNetB2 model trained for 10 epochs with 20% dataset](https://github.com/lanehale/pytorch-deep-learning/blob/main/loss-curves-images/Confusion%20Matrix%20-%20EffNetB2_model_10_epochs_20_percent_dataset.png)
 
 ### Loss and Accuracy curves for EffNetB2 model trained for 10 epochs with 20% dataset
