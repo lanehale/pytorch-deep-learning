@@ -137,6 +137,8 @@ def run_model(model,
   end_time = timer()
   print(f"[INFO] Total running time: {end_time - start_time:.3f} seconds")
 
+  print(f"Max test acc: {max(results['test_acc']):.3f} | Min test loss: {min(results['test_loss']):.3f}")
+
   # Make predictions and store in a list of dictionaries
   print("Predicting with image_data...")
   pred_list, test_preds_tensor = predict_and_store(
@@ -145,6 +147,17 @@ def run_model(model,
       transform=auto_transforms,
       class_names=class_names,
       device=device
+  )
+
+  false_count = 0
+  for pred in pred_list:
+    if pred['correct'] == False:
+      false_count += 1
+  false_percent = 100 * false_count / len(pred_list)
+  print(
+      f"{name :<10} | False predictions: {false_count :<2} out of {len(pred_list) :<3}, "
+      f"or {false_percent:5.2f}% wrong, "
+      f"{(100.0 - false_percent):.2f}% right"
   )
 
   # Setup confusion matrix instance and compare predictions to targets
@@ -181,8 +194,6 @@ def run_model(model,
       class_names=class_names,
       figsize=(10, 7)
   );
-
-  print(f"Max test acc: {max(results['test_acc']):.3f} | Min test loss: {min(results['test_loss']):.3f}")
 
   return results, pred_list
 
