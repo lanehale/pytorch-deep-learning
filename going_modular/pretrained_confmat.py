@@ -155,7 +155,7 @@ def run_model(model,
       false_count += 1
   false_percent = 100 * false_count / len(pred_list)
   print(
-      f"{name :<10} | False predictions: {false_count :<2} out of {len(pred_list) :<3}, "
+      f"False predictions: {false_count :<2} out of {len(pred_list) :<3}, "
       f"or {false_percent:5.2f}% wrong, "
       f"{(100.0 - false_percent):.2f}% right"
   )
