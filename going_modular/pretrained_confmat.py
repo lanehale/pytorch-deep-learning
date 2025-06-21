@@ -185,8 +185,7 @@ def run_model(model,
   true_labels_tensor = torch.tensor(class_indices_list)
 
   confmat_tensor = confmat(preds=test_preds_tensor,
-                           true_labels_tensor)
-                           #target=test_truth)
+                           true_labels_tensor)       # can't use this, target=test_truth)
 
   # Plot the confusion matrix
   fig, ax = plot_confusion_matrix(
