@@ -39,16 +39,17 @@ def predict_and_store(model, test_paths, transform, class_names, device):
     # Save prediction and pred prob
     from PIL import Image
     img = Image.open(path)
-    transformed_image = transform(img).unsqueeze(dim=0).to(device)  # transform image and add batch dimension
+    transformed_image = transform(img).unsqueeze(dim=0)  # transform image and add batch dimension
     model.eval()
     with torch.inference_mode():
       pred_logit = model(transformed_image.to(device))
       pred_prob = torch.softmax(pred_logit, dim=1)
       pred_label = torch.argmax(pred_prob, dim=1)
-      pred_class = class_names[pred_label.cpu()]       # or can replace .cpu()] with .item
+      pred_class = class_names[pred_label.cpu()]  # or could replace .cpu() with .item() since pred_label is a scalar value (index to the class_name)
 
-      pred_dict["pred_prob"] = pred_prob.max().item()  # get the highest pred_prob
-      pred_dict["pred_class"] = pred_class             # predicted class name
+      # Make sure the highest pred_prob is back on the CPU for the dictionary
+      pred_dict["pred_prob"] = pred_prob.unsqueeze(0).max().cpu().item()
+      pred_dict["pred_class"] = pred_class  # predicted class name
 
       test_preds.append(pred_label.cpu())
 
@@ -150,10 +151,29 @@ def run_model(model,
   confmat = ConfusionMatrix(num_classes=len(class_names), task='multiclass')
 
   # Get truth labels for test dataset
-  test_truth = torch.cat([y for X, y in test_dataloader])
+  """ We can't use these since the test_image_path_list order isn't the same as the dataset's sample order """
+  #test_truth = torch.cat([y for X, y in test_dataloader])
+
+  """
+  Build a truths tensor from the class order in test_image_path_list since it isn't
+  the same order as the dataset in the test_dataloader. Without a true labels tensor
+  the confusion matrix won't be correct.
+  """
+  class_indices_list = []
+  for item in pred_list:
+    if item["class_name"] == "pizza":
+      index = 0;
+    elif item["class_name"] == "steak":
+      index = 1;
+    elif item["class_name"] == "sushi":
+      index = 2;
+    class_indices_list.append(index)
+
+  true_labels_tensor = torch.tensor(class_indices_list)
 
   confmat_tensor = confmat(preds=test_preds_tensor,
-                           target=test_truth)
+                           true_labels_tensor)
+                           #target=test_truth)
 
   # Plot the confusion matrix
   fig, ax = plot_confusion_matrix(
