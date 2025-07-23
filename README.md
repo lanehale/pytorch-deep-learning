@@ -23,7 +23,7 @@ https://huggingface.co/spaces/lanehale1/foodvision_big
 
 https://github.com/lanehale/pytorch-deep-learning/blob/main/Loss_Curves_and_Predictions.md
 
-### Notebooks Overview:
+## Notebooks Overview
 00_pytorch_fundamentals.ipynb
 
 * Dealing with the basic building block of machine learning and 
