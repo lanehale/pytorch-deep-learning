@@ -28,7 +28,7 @@ https://github.com/lanehale/pytorch-deep-learning/blob/main/Loss_Curves_and_Pred
 
 * Dealing with the basic building block of machine learning and 
 deep learning--the tensor
-
+****************************************************************
 01_workflow_fundamentals.ipynb
 
 * Learning a standard PyTorch workflow (it can be chopped and 
