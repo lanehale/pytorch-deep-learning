@@ -24,48 +24,48 @@ https://huggingface.co/spaces/lanehale1/foodvision_big
 https://github.com/lanehale/pytorch-deep-learning/blob/main/Loss_Curves_and_Predictions.md
 
 ### Notebooks Overview:
-*	00_pytorch_fundamentals.ipynb
+00_pytorch_fundamentals.ipynb
 
-Dealing with the basic building block of machine learning and 
+* Dealing with the basic building block of machine learning and 
 deep learning--the tensor
 ****************************************************************
-*	01_workflow_fundamentals.ipynb
+01_workflow_fundamentals.ipynb
 
-Learning a standard PyTorch workflow (it can be chopped and 
+* Learning a standard PyTorch workflow (it can be chopped and 
 changed as necessary but it covers the main outline of steps)
 ****************************************************************
-*	02_neural_network_classification.ipynb
+02_neural_network_classification.ipynb
 
-Working on a classification problem (predicting whether 
+* Working on a classification problem (predicting whether 
 something is one thing or another)
 ****************************************************************
-*	03_computer_vision.ipynb
+03_computer_vision.ipynb
 
-Applying the PyTorch Workflow from previous sections to 
+* Applying the PyTorch Workflow from previous sections to 
 computer vision (the art of teaching a computer to see)
 ****************************************************************
-*	04_custom_datasets.ipynb
+04_custom_datasets.ipynb
 
-Applying the PyTorch Workflow to a computer vision problem 
+* Applying the PyTorch Workflow to a computer vision problem 
 with our own dataset of pizza, steak and sushi images
 ****************************************************************
-*	05_modular_python_scripts.ipynb
+05_modular_python_scripts.ipynb
 
-Turning the most useful code cells from notebook 04 into a series 
+* Turning the most useful code cells from notebook 04 into a series 
 of Python scripts saved to a directory called going_modular
 ****************************************************************
-*	06_transfer_learning_exercises.ipynb
+06_transfer_learning_exercises.ipynb
 
-Using pretrained models with our pizza, steak, sushi data
+* Using pretrained models with our pizza, steak, sushi data
 ****************************************************************
-*	06_transfer_learning_scripts.ipynb
+06_transfer_learning_scripts.ipynb
 
-Creating scripts to help run several transfer learning model 
+* Creating scripts to help run several transfer learning model 
 experiments with less code
 ****************************************************************
-*	06_transfer_learning_experiments.ipynb
+06_transfer_learning_experiments.ipynb
 
-Running several transfer learning model experiments with 
+* Running several transfer learning model experiments with 
 different hyperparameters
 ****************************************************************
 *	07_experiment_tracking.ipynb
