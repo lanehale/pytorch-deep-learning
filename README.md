@@ -68,29 +68,29 @@ experiments with less code
 * Running several transfer learning model experiments with 
 different hyperparameters
 ****************************************************************
-*	07_experiment_tracking.ipynb
+07_experiment_tracking.ipynb
 
-Using TensorBoard to track machine learning experiments
+* Using TensorBoard to track machine learning experiments
 ****************************************************************
-*	07_experiment_tracking_redo_predictions.ipynb
+07_experiment_tracking_redo_predictions.ipynb
 
-Redoing predictions with a transform on each image used for 
+* Redoing predictions with a transform on each image used for 
 prediction
 ****************************************************************
-*	07_larger_models_and_datasets.ipynb
+07_larger_models_and_datasets.ipynb
 
-Trying larger models and larger datasets
+* Trying larger models and larger datasets
 ****************************************************************
-*	08_replicating_transformer_encoders.ipynb
+08_replicating_transformer_encoders.ipynb
 
-Replicating a machine learning research paper to create a 
+* Replicating a machine learning research paper to create a 
 Vision Transformer (ViT) from scratch using PyTorch
 ****************************************************************
-*	09_model_deployment_part_1.ipynb
+09_model_deployment_part_1.ipynb
 
-Preparing to deploy our FoodVision Mini model to the internet 
+* Preparing to deploy our FoodVision Mini model to the internet 
 as a usable app
 ****************************************************************
-*	09_model_deployment_part_2.ipynb
+09_model_deployment_part_2.ipynb
 
-Bringing FoodVision Mini to life by creating a Gradio demo
+* Bringing FoodVision Mini to life by creating a Gradio demo
